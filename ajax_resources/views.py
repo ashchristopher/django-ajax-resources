@@ -24,7 +24,7 @@ def resource_loader(request, application, resource, **kwargs):
     Loads and AJAX endpoint resource.
     """
     try:
-        module = import_module('%s.ajax_resources' % application)
+        module = import_module('%s.ajax' % application)
         resource_func = getattr(module, resource)
     except (ImportError, AttributeError):
         if settings.DEBUG:
