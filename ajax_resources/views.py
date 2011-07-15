@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 from django.utils import simplejson
 from django.http import HttpResponse
 from decorator import decorator
+from django.core.serializers.json import DjangoJSONEncoder
 
 from ajax_resources.exceptions import AJAXError, InvalidResourceException
 
@@ -36,7 +37,7 @@ def resource_loader(request, application, resource, **kwargs):
     if not isinstance(data, dict):
         raise InvalidResourceException('Resource did not return a dict.')
 
-    response = HttpResponse(simplejson.dumps(data, indent=4))
+    response = HttpResponse(simplejson.dumps(data, indent=4, cls=DjangoJSONEncoder))
     response['Content-Type'] = 'application/json'
 
     return response
