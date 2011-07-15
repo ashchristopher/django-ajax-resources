@@ -5,9 +5,8 @@ from django.utils import simplejson
 from django.http import HttpResponse
 from decorator import decorator
 
+from ajax_resources.exceptions import AJAXError, InvalidResourceException
 
-
-from ajax_endpoints.exceptions import AJAXError, InvalidResourceException
 
 @decorator
 def ajax_handler(f, *args, **kwargs):
@@ -24,7 +23,7 @@ def resource_loader(request, application, resource, **kwargs):
     Loads and AJAX endpoint resource.
     """
     try:
-        module = import_module('%s.endpoints' % application)
+        module = import_module('%s.ajax_resources' % application)
         resource_func = getattr(module, resource)
     except (ImportError, AttributeError):
         if settings.DEBUG:
