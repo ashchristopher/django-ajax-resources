@@ -30,7 +30,7 @@ The only requirement is that the ajax view should return a `dict`.
 
 
 # Security
-This class is very simple, and by itself should not pose any security issues, but 
+This app is very simple, and by itself should not pose any security issues, but 
 like all software, if you are not careful, you could shoot yourself in the foot. If
 you are making authenticated resources available, you are susceptible to CSRF.
 
