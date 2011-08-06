@@ -14,6 +14,6 @@ setup(
     license='LICENSE.txt',
     url='http://github.com/ashchristopher/django-ajax-resources',
     keywords='django ajax resource endpoint',
-    long_description=read('README'),
+    long_description=read('README.mkd'),
     install_requires = ['decorator>=3.3'], # i used 3.3.1, so I picked 3.3 arbitrarily.    
 )
