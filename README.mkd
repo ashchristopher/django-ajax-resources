@@ -1,0 +1,37 @@
+# Overview
+
+This package provides simple ajax endpoints for your django projects. It is 
+heavily influenced by Joe Stump's [django-ajax](http://github.com/joestump/django-ajax)
+project.
+
+# Install
+1. Install django-ajax-resources either by calling `python setup.py` or better yet, using pip.
+2. Add `ajax_resources` to your `INSTALLED_APPS` in your `settings.py` file.
+3. Add `(r'^ajax/', include('ajax_resources.urls'))` to your Django project's `urls.py` file.
+
+# Usage
+The simplest way to get started is to create an `ajax.py` file in your app and create a function
+like the following:
+
+    from ajax_resources.exceptions import AJAXError
+    from my_app.models import MyObject 
+
+    def super_simple(request):
+        return { 'message' : 'Hello World' }
+
+    def almost_as_simple(request):
+        try:
+            my_obj = get_object_or_404(MyObject, pk=request.GET['obj_id'])
+        except Http404:
+            raise AJAXError(404, u'Object not found')
+        return { 'message' : my_obj.some_var, }
+
+The only requirement is that the ajax view should return a `dict`.
+
+
+# Security
+This class is very simple, and by itself should not pose any security issues, but 
+like all software, if you are not careful, you could shoot yourself in the foot. If
+you are making authenticated resources available, you are susceptible to CSRF.
+
+It is up to *you*, the developer to protect against this.
